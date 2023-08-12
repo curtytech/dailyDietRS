@@ -1,0 +1,64 @@
+
+// styled-components
+npm i styled-components
+
+// types/styled-components
+npm i --save-dev @types/styled-components @types/styled-components-react-native
+
+
+
+asyncstorage
+npx expo install @react-native-async-storage/async-storage
+
+
+// Navigation
+npm install @react-navigation/native
+
+npx expo install react-native-screens react-native-safe-area-context
+
+// Stack Navigation
+npm install @react-navigation/native-stack
+
+
+
+
+
+// i react native svg
+npx expo install react-native-svg
+
+//i svg transformer
+yarn add --dev react-native-svg-transformer
+
+//add essas linhas no metro.config.js
+const { getDefaultConfig } = require("expo/metro-config");
+
+module.exports = (() => {
+  const config = getDefaultConfig(__dirname);
+
+  const { transformer, resolver } = config;
+
+  config.transformer = {
+    ...transformer,
+    babelTransformerPath: require.resolve("react-native-svg-transformer"),
+  };
+  config.resolver = {
+    ...resolver,
+    assetExts: resolver.assetExts.filter((ext) => ext !== "svg"),
+    sourceExts: [...resolver.sourceExts, "svg"],
+  };
+
+  return config;
+})();
+
+// criar um arquivo svg.d.ts
+declare module "*.svg"{
+    import React from 'react';
+    import { SvgProps } from 'react-native-svg';
+    const content: React.FC<SvgProps>;
+    export default content;
+}
+
+// i hook form 
+npm install react-hook-form
+
+npm install @hookform/resolvers yup
